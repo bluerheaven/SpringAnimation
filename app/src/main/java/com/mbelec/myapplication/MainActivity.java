@@ -16,10 +16,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         findViewById(R.id.tv).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-//                MyDialog myDialog = new MyDialog(MainActivity.this);
-//                myDialog.showDialog(R.layout.dialog, 0, 0);
+                MyDialog myDialog = new MyDialog(MainActivity.this);
+                myDialog.showDialog(R.layout.dialog, 0, 0);
 
-                showDialog();
+//                showDialog();
             }
         });
     }
@@ -27,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 弹性弹框
+     * 张力（Tension）=196
+     * 摩擦力（Friction）=25
+     *
+     * IOS:
+     * velocity=0
+     * dampingRatio = 0.89
      */
     private void showDialog() {
         Dialog dialog = new Dialog(MainActivity.this, R.style.test_dialog);
@@ -43,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         //Stiffness越小，弹性效果越好，弹的时间越长。DampingRatio的值越大，弹性效果越差。
         //StartVelocity开始速度，单位是px/second.正数是弹簧收缩的方向，负数则相反。
         SpringAnimation signUpBtnAnimY = new SpringAnimation(test_view, SpringAnimation.TRANSLATION_Y, 0);
+        //Android可以设置的三个参数：Stiffness、DampingRatio、StartVelocity
         signUpBtnAnimY.getSpring().setStiffness(SpringForce.STIFFNESS_VERY_LOW);
         signUpBtnAnimY.getSpring().setDampingRatio(SpringForce.DAMPING_RATIO_LOW_BOUNCY);
         signUpBtnAnimY.setStartVelocity(10000);
