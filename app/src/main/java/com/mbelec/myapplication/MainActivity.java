@@ -43,16 +43,22 @@ public class MainActivity extends AppCompatActivity {
         View test_view = contentView.findViewById(R.id.test_view);
 
         dialog.setContentView(contentView);
-
         dialog.setCanceledOnTouchOutside(true);
-
         //Stiffness越小，弹性效果越好，弹的时间越长。DampingRatio的值越大，弹性效果越差。
         //StartVelocity开始速度，单位是px/second.正数是弹簧收缩的方向，负数则相反。
-        SpringAnimation signUpBtnAnimY = new SpringAnimation(test_view, SpringAnimation.TRANSLATION_Y, 0);
+        SpringAnimation signUpBtnAnimX = new SpringAnimation(contentView, SpringAnimation.SCALE_X, 1f);
+        //Android可以设置的三个参数：Stiffness、DampingRatio、StartVelocity
+        signUpBtnAnimX.getSpring().setStiffness(SpringForce.STIFFNESS_VERY_LOW);
+        signUpBtnAnimX.getSpring().setDampingRatio(SpringForce.DAMPING_RATIO_LOW_BOUNCY);
+        signUpBtnAnimX.setStartVelocity(1);
+        signUpBtnAnimX.start();
+
+        SpringAnimation signUpBtnAnimY = new SpringAnimation(contentView, SpringAnimation.SCALE_Y, 1f);
         //Android可以设置的三个参数：Stiffness、DampingRatio、StartVelocity
         signUpBtnAnimY.getSpring().setStiffness(SpringForce.STIFFNESS_VERY_LOW);
         signUpBtnAnimY.getSpring().setDampingRatio(SpringForce.DAMPING_RATIO_LOW_BOUNCY);
-        signUpBtnAnimY.setStartVelocity(10000);
+        signUpBtnAnimY.setStartVelocity(1);
+        signUpBtnAnimY.canSkipToEnd();
         signUpBtnAnimY.start();
         dialog.show();
     }
